@@ -1,0 +1,293 @@
+/* Generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    overflow: hidden;
+    background-color: #e8f5e9;
+}
+
+/* Estructura de pantalla completa */
+.pantalla {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+/* Mostrar pantalla */
+.visible {
+    display: flex !important;
+    z-index: 10;
+    opacity: 1;
+}
+
+/* Centrado */
+.centrado, .pantalla-centrado, .pantalla-centrada {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Animación bienvenida */
+#bienvenida-texto {
+    font-size: 100px;
+    opacity: 0;
+    animation: fadeInOut 3s ease forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    25% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Formulario tipo tarjeta */
+.card-formulario {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+.card-formulario form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card-formulario input,
+.card-formulario button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.card-formulario button {
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+/* Contenedor de info del juego */
+#marcadores {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: transparent;
+}
+
+.marcador {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: 'Orbitron', monospace;
+    font-size: 18px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#tiempo,
+#puntaje {
+    background: black;
+    color: lime;
+}
+
+/* Puntaje en otro color */
+#puntaje {
+    color: gold;
+}
+
+/* Canvas */
+
+.contenedor-juego {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 50px; 
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+
+/* Pantalla de juego centrada */
+#pantalla-juego {
+    background-color: #f0f0f0;
+    padding-top: 20px;
+}
+
+/* Pantalla final */
+#pantalla-final {
+    background-color: #e8f5e9;
+}
+
+.imagen-final {
+    width: 180px;
+    height: 180px;
+    object-fit: contain; /* Mantiene la proporción sin estirar */
+    margin-bottom: 20px;
+    border-radius: 50%; /* Hace la imagen circular */
+    background-color: #f9f9f9;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+#pantalla-final h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #2e7d32;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+#puntaje-final {
+    font-size: 24px;
+    font-family: 'Orbitron', monospace;
+    background: #2e7d32;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.contenido-final {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Animacion de confeti*/
+#confetti {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Para que no interfiera con la interacción */
+    z-index: 100; 
+}
+
+.ball {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation-name: caer;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes caer {
+    0% {
+        top: -10px;
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        top: 100vh;
+        transform: translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Estilos responsive */
+@media (max-width: 600px) {
+    .contenido-final {
+        padding: 20px;
+        width: 85%;
+    }
+    
+    .imagen-final {
+        width: 150px;
+        height: 150px;
+    }
+    
+    #puntaje-final {
+        font-size: 20px;
+    }
+}
+
+/* Animaciones para la pantalla final */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.contenido-final {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.imagen-final {
+    animation: fadeIn 1s ease-out 0.3s backwards;
+}
+
+#puntaje-final {
+    animation: fadeIn 1.2s ease-out 0.6s backwards;
+}
+
+/* Efectos adicionales */
+.contenido-final h1 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+/* Animación para el canvas */
+@keyframes canvasEntrada {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+#rompecabezas {
+    animation: canvasEntrada 0.8s ease-out;
+}
+
+/* Efecto hover para los marcadores */
+.marcador {
+    transition: transform 0.2s;
+}
+
+.marcador:hover {
+    transform: translateY(-2px);
+}
