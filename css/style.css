@@ -41,9 +41,19 @@ body, html {
 
 /* Animación bienvenida */
 #bienvenida-texto {
-    font-size: 100px;
+    font-size: 8vw;
+    text-align: center;
     opacity: 0;
-    animation: fadeInOut 3s ease forwards;
+    animation: rotateAnim 2.6s linear infinite, fadeInOut 3s ease forwards;
+    
+    background: linear-gradient(to right, #db4900, #ff7700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes rotateAnim {
+    35% { transform: rotateZ(360deg); }
+    100% { transform: rotateZ(360deg); }
 }
 
 @keyframes fadeInOut {
@@ -59,7 +69,8 @@ body, html {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 300px;
+    width: 90%;
+    max-width: 350px;
 }
 
 .card-formulario form {
@@ -71,7 +82,7 @@ body, html {
 .card-formulario input,
 .card-formulario button {
     padding: 10px;
-    font-size: 16px;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -95,6 +106,8 @@ body, html {
     left: 0;
     z-index: 10;
     background: transparent;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .marcador {
@@ -102,39 +115,43 @@ body, html {
     border-radius: 8px;
     font-weight: bold;
     font-family: 'Orbitron', monospace;
-    font-size: 18px;
+    font-size: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
 }
 
-#tiempo,
-#puntaje {
+#tiempo, #puntaje {
     background: black;
     color: lime;
 }
 
-/* Puntaje en otro color */
 #puntaje {
     color: gold;
 }
 
 /* Canvas */
+#rompecabezas {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+    display: block;
+    margin: 0 auto;
+    background: #f9f9f9;
+}
 
 .contenedor-juego {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding-top: 50px; 
+    padding-top: 60px;
     flex-direction: column;
     gap: 20px;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
 }
-
-
 
 /* Pantalla de juego centrada */
 #pantalla-juego {
@@ -150,9 +167,9 @@ body, html {
 .imagen-final {
     width: 180px;
     height: 180px;
-    object-fit: contain; /* Mantiene la proporción sin estirar */
+    object-fit: contain;
     margin-bottom: 20px;
-    border-radius: 50%; /* Hace la imagen circular */
+    border-radius: 50%;
     background-color: #f9f9f9;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -161,16 +178,17 @@ body, html {
 }
 
 #pantalla-final h1 {
-    font-size: 36px;
+    font-size: 2.2rem;
     margin-bottom: 20px;
     color: #2e7d32;
     display: flex;
     justify-content: center;
     margin-top: 25px;
+    text-align: center;
 }
 
 #puntaje-final {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-family: 'Orbitron', monospace;
     background: #2e7d32;
     color: white;
@@ -179,7 +197,6 @@ body, html {
     margin-top: 10px;
     display: flex;
     justify-content: center;
-    margin-top: 10px;
 }
 
 .contenido-final {
@@ -195,17 +212,18 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: fadeIn 0.8s ease-out;
 }
 
-/* Animacion de confeti*/
+/* Animación de confeti */
 #confetti {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Para que no interfiera con la interacción */
-    z-index: 100; 
+    pointer-events: none;
+    z-index: 100;
 }
 
 .ball {
@@ -219,43 +237,62 @@ body, html {
 }
 
 @keyframes caer {
-    0% {
-        top: -10px;
-        transform: translateX(0);
-        opacity: 1;
-    }
-    100% {
-        top: 100vh;
-        transform: translateX(100px);
-        opacity: 0;
-    }
+    0% { top: -10px; transform: translateX(0); opacity: 1; }
+    100% { top: 100vh; transform: translateX(100px); opacity: 0; }
 }
 
-/* Estilos responsive */
-@media (max-width: 600px) {
-    .contenido-final {
-        padding: 20px;
-        width: 85%;
-    }
-    
+/* Responsive */
+@media (max-width: 768px) {
     .imagen-final {
         width: 150px;
         height: 150px;
     }
-    
+
+    #bienvenida-texto {
+        font-size: 10vw;
+    }
+
     #puntaje-final {
-        font-size: 20px;
+        font-size: 1.2rem;
+    }
+
+    .card-formulario {
+        width: 90%;
+    }
+
+    #pantalla-final h1 {
+        font-size: 1.8rem;
     }
 }
 
-/* Animaciones para la pantalla final */
+@media (max-width: 480px) {
+    .imagen-final {
+        width: 130px;
+        height: 130px;
+    }
+
+    .contenido-final {
+        padding: 20px;
+    }
+
+    #puntaje-final {
+        font-size: 1rem;
+    }
+
+    .marcador {
+        font-size: 0.9rem;
+    }
+}
+
+/* Efecto hover marcador */
+.marcador:hover {
+    transform: translateY(-2px);
+}
+
+/* Animaciones */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-.contenido-final {
-    animation: fadeIn 0.8s ease-out;
 }
 
 .imagen-final {
@@ -266,14 +303,13 @@ body, html {
     animation: fadeIn 1.2s ease-out 0.6s backwards;
 }
 
-/* Efectos adicionales */
 .contenido-final h1 {
     color: #333;
     margin-bottom: 15px;
-    font-size: 28px;
+    font-size: 1.75rem;
 }
 
-/* Animación para el canvas */
+/* Animación canvas */
 @keyframes canvasEntrada {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
@@ -281,13 +317,4 @@ body, html {
 
 #rompecabezas {
     animation: canvasEntrada 0.8s ease-out;
-}
-
-/* Efecto hover para los marcadores */
-.marcador {
-    transition: transform 0.2s;
-}
-
-.marcador:hover {
-    transform: translateY(-2px);
 }
